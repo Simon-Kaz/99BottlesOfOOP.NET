@@ -6,50 +6,42 @@ public class Bottles
 {
     public string Song() => Verses(99, 0);
 
-    public string Verses(int hi, int lo)
+    public string Verse(int count)
     {
-        var result = new StringBuilder();
-
-        for (int i = hi; i >= lo; i--)
+        return count switch
         {
-            result.Append(Verse(i));
-            if (i > lo)
-            {
-                result.AppendLine();
-            }
-        }
+            0 => "No more bottles of beer on the wall, " +
+                 "no more bottles of beer.\n" +
+                 "Go to the store and buy some more, " +
+                 "99 bottles of beer on the wall.\n",
 
+            1 => "1 bottle of beer on the wall, " +
+                 "1 bottle of beer.\n" +
+                 "Take it down and pass it around, " +
+                 "no more bottles of beer on the wall.\n",
 
-        return result.ToString();
+            2 => "2 bottles of beer on the wall, " +
+                 "2 bottles of beer.\n" +
+                 "Take one down and pass it around, " +
+                 "1 bottle of beer on the wall.\n",
+
+            _ => $"{count} bottles of beer on the wall, " +
+                 $"{count} bottles of beer.\n" +
+                 "Take one down and pass it around, " +
+                 $"{count - 1} bottles of beer on the wall.\n"
+        };
     }
 
-    public string Verse(int number)
+    public string Verses(int upper, int lower)
     {
-        switch (number)
+        var result = new StringBuilder();
+        for (int i = upper; i >= lower; i--)
         {
-            case 0:
-                return "No more bottles of beer on the wall, " +
-                       "no more bottles of beer.\n" +
-                       "Go to the store and buy some more, " +
-                       "99 bottles of beer on the wall.\n";
-
-            case 1:
-                return "1 bottle of beer on the wall, " +
-                       "1 bottle of beer.\n" +
-                       "Take it down and pass it around, " +
-                       "no more bottles of beer on the wall.\n";
-
-            case 2:
-                return "2 bottles of beer on the wall, " +
-                       "2 bottles of beer.\n" +
-                       "Take one down and pass it around, " +
-                       "1 bottle of beer on the wall.\n";
-
-            default:
-                return $"{number} bottles of beer on the wall, " +
-                       $"{number} bottles of beer.\n" +
-                       "Take one down and pass it around, " +
-                       $"{number - 1} bottles of beer on the wall.\n";
+            result.Append(Verse(i));
+            if (i > lower)
+                result.AppendLine();
         }
+
+        return result.ToString();
     }
 }
