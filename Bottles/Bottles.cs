@@ -19,16 +19,11 @@ public class Bottles
                  "1 bottle of beer.\n" +
                  "Take it down and pass it around, " +
                  "no more bottles of beer on the wall.\n",
-
-            2 => "2 bottles of beer on the wall, " +
-                 "2 bottles of beer.\n" +
-                 "Take one down and pass it around, " +
-                 "1 bottle of beer on the wall.\n",
-
+            
             _ => $"{count} bottles of beer on the wall, " +
                  $"{count} bottles of beer.\n" +
                  "Take one down and pass it around, " +
-                 $"{count - 1} bottles of beer on the wall.\n"
+                 $"{count - 1} {Container(count - 1)} of beer on the wall.\n"
         };
     }
 
@@ -44,4 +39,11 @@ public class Bottles
 
         return result.ToString();
     }
+
+    private string Container(int number) =>
+        number switch
+        {
+            1 => "bottle",
+            _ => "bottles"
+        };
 }
