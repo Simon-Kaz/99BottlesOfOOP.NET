@@ -8,13 +8,12 @@ public class Bottles
 
     public string Verse(int number)
     {
-        var bottleNumber = new BottleNumber(number);
-        var nextBottleNumber = new BottleNumber(bottleNumber.Successor());
+        var bottleNumber = BottleNumber.For(number);
 
-        return $"{Capitalize(bottleNumber.Quantity())} {bottleNumber.Container()} of beer on the wall, " +
-               $"{bottleNumber.Quantity()} {bottleNumber.Container()} of beer.\n" +
+        return $"{Capitalize($"{bottleNumber}")} of beer on the wall, " +
+               $"{bottleNumber} of beer.\n" +
                bottleNumber.Action() +
-               $"{nextBottleNumber.Quantity()} {nextBottleNumber.Container()} of beer on the wall.\n";
+               $"{bottleNumber.Successor()} of beer on the wall.\n";
     }
 
     public string Verses(int upper, int lower)

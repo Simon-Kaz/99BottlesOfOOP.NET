@@ -1,38 +1,22 @@
 namespace Bottles;
 
-public class BottleNumber(int number)
+public abstract class BottleNumber(int number)
 {
-    public string Quantity()
+    protected readonly int number = number;
+
+    public static BottleNumber For(int number)
         => number switch
         {
-            0 => "no more",
-            _ => number.ToString()
+            0 => new ZeroBottleNumber(),
+            1 => new OneBottleNumber(),
+            6 => new SixBottleNumber(),
+            _ => new RegularBottleNumber(number)
         };
 
-    public string Container() =>
-        number switch
-        {
-            1 => "bottle",
-            _ => "bottles"
-        };
-
-    public string Action()
-        => number switch
-        {
-            0 => "Go to the store and buy some more, ",
-            _ => $"Take {Pronoun()} down and pass it around, "
-        };
-
-    public string Pronoun() =>
-        number switch
-        {
-            1 => "it",
-            _ => "one"
-        };
-
-    public int Successor() => number switch
-    {
-        0 => 99,
-        _ => number - 1
-    };
+    public abstract string Quantity();
+    public abstract string Container();
+    public abstract string Action();
+    public abstract string Pronoun();
+    public abstract BottleNumber Successor();
+    public override string ToString() => $"{Quantity()} {Container()}";
 }
