@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Bottles;
 
 public abstract class BottleNumber(int number)
@@ -5,13 +7,13 @@ public abstract class BottleNumber(int number)
     protected readonly int number = number;
 
     public static BottleNumber For(int number)
-        => number switch
-        {
-            0 => new ZeroBottleNumber(),
-            1 => new OneBottleNumber(),
-            6 => new SixBottleNumber(),
-            _ => new RegularBottleNumber(number)
-        };
+    {
+        var type = BottleNumberRegistry.GetTypeForNumber(number);
+        if (type == typeof(RegularBottleNumber))
+            return new RegularBottleNumber(number);
+
+        return (BottleNumber) Activator.CreateInstance(type)!;
+    }
 
     public abstract string Quantity();
     public abstract string Container();

@@ -1,5 +1,6 @@
 namespace Bottles;
 
+[HandlesNumber(6)]
 public class SixBottleNumber() : BottleNumber(6)
 {
     public override string Quantity() => "1";

@@ -1,5 +1,6 @@
 namespace Bottles;
 
+[HandlesNumber(0)]
 public class ZeroBottleNumber() : BottleNumber(0)
 {
     public override string Quantity() => "no more";
